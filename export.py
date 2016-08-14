@@ -27,7 +27,7 @@ def export_images(self):
                 if len(splitted_id) > 1 and splitted_id[-1] in extensions:
                     title = '%s.%s' % (title, splitted_id[-1])
             data = image.data
-            file = open(pathname+title, 'w')
+            file = open(pathname+title, 'wb')
             file.write(data)
             file.close
         except:
