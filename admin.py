@@ -16,13 +16,15 @@ class AuthorAdmin(admin.ModelAdmin):
         return obj.presentation and obj.presentation[:20] or ''
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['import_id', 'id', 'title', 'subtitle', 'workflow_state', 'publication_state', 'series_title', 'isbn', 'pde', 'year', 'price', 'pres',]
+    # prepopulated_fields = {'slug': ('product_name',)}
+    list_display = ['import_id', 'id', 'product_name', 'subtitle', 'workflow_state', 'publication_state', 'series_title', 'isbn', 'pde', 'year', 'unit_price', 'pres',]
+    search_fields = ('product_name',)
 
     def series_title(self, obj):
-        return obj.series.title
+        return obj.series and obj.series.title or ''
 
     def pres(self, obj):
-        return obj.presentation and obj.presentation[:20] or ''
+        return obj.description and obj.description[:20] or ''
 
 class BookAuthorAdmin(admin.ModelAdmin):
     list_display = ['id', 'book_title', 'author_name', 'role', 'role_prefix',]

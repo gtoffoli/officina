@@ -37,7 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'django_extensions',
+    'treebeard',
+    'easy_thumbnails',
+    'filer',
+    'ckeditor',
+    'ckeditor_filebrowser_filer',
+    'menus',
+    # 'cms',
+    'post_office',
+    'shop',
     'officina',
 ]
 
@@ -113,11 +123,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = (
+    ('en', 'English'),
+    ('it', 'Italiano'),
+)
 
 TIME_ZONE = 'UTC'
 
@@ -127,8 +141,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE_ID = 1
+SITE_NAME = 'Officina Edizioni'
+SHOP_APP_LABEL = 'Officina Edizioni'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+

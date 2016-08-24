@@ -2,6 +2,7 @@
 
 import os
 import json
+from decimal import Decimal
 from .models import Series, Author, Book, BookAuthor, Area, Distributor, DistributorArea
 from .models import IN_PRESS, IN_DISTRIBUTION, OUT_OF_PRINT
 from .models import AUTHOR, EDITOR
@@ -47,7 +48,12 @@ def import_books(data):
         pages = d['pages'][:100]
         price = d['price']
         if price is None: price = 0.0
-        book = Book(import_id=d['id'], publication_state=publication_state, title=d['title'], subtitle=d['subtitle'], isbn=d['isbn'], pde=d['pde'], year=d['year'], pages=pages, price=price, small_image=d['small_image'], medium_image=d['medium_image'], presentation=d['presentation'])
+        small_image = d['small_image']
+        small_image = small_image and 'images/'+small_image or ''
+        medium_image = d['medium_image']
+        medium_image = medium_image and 'images/'+medium_image or ''
+        # book = Book(import_id=d['id'], publication_state=publication_state, title=d['title'], subtitle=d['subtitle'], isbn=d['isbn'], pde=d['pde'], year=d['year'], pages=pages, price=price, small_image=d['small_image'], medium_image=d['medium_image'], presentation=d['presentation'])
+        book = Book(import_id=d['id'], publication_state=publication_state, product_name=d['title'], subtitle=d['subtitle'], isbn=d['isbn'], pde=d['pde'], year=d['year'], pages=pages, unit_price=Decimal(price), description=d['presentation'], small_image=small_image, medium_image=medium_image)
         book.save()
     print('books: ', len(book_list))
 
